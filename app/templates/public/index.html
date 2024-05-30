@@ -1,103 +1,169 @@
 <!DOCTYPE html>
 <html lang="es">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Enviar Formulario HTML con Flask - Python y MySQL</title>
-    <link rel="icon" type="image/png" href="{{ url_for('static', filename = 'imgs/favicon.png') }}">
-
-    <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/skeleton.css') }}">
+    <link
+      rel="icon"
+      type="image/png"
+      href="{{ url_for('static', filename = 'imgs/favicon.png') }}"
+    />
+    <link
+      href="//fonts.googleapis.com/css?family=Raleway:400,300,600"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/responsive.css') }}"
+    />
     <style>
-        .msg{
-            text-align: center;
-            font-size: 4rem;
-            line-height: 1em;
-            font-weight: 800;
-            color: orange;
-            background: #f2f4f8;
-            display: flex;
-            justify-content: center;
-            margin: 0 auto;
-        }
+      .msg {
+        text-align: center;
+        font-size: 4rem;
+        line-height: 1em;
+        font-weight: 800;
+        color: orange;
+        background: #f2f4f8;
+        display: flex;
+        justify-content: center;
+        margin: 0 auto;
+      }
     </style>
-</head>
-
-<body>
-
-
-  {% if msg %}
+  </head>
+  <body>
+    {% if msg %}
     <p class="msg">{{ msg }}</p>
-  {% endif %}
-
-
+    {% endif %}
     <div class="container">
-        <div class="row">
-            <div class="Column" style="margin-top: 5%">
-                <h3>
-                    <strong>
-                    Enviar formulario HTML con Flask y Python 🐍 a MySQL 
-                    </strong>
-                    <hr>
-            </h3>
-
-                <form action="{{ url_for('registrarForm') }}" method="POST" autocomplete="off">
-                    <div class="row">
-                        <div class="six columns">
-                            <label for="nombre">Nombre</label>
-                            <input type="text" name="nombre" class="u-full-width">
-                        </div>
-                        <div class="six columns">
-                            <label for="sexo">Sexo</label>
-                            <select class="u-full-width" name="sexo">
-                                <option value="Masculino">Masculino</option>
-                                <option value="Femenino">Femenino</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="six columns">
-                            <label class="example-send-yourself-copy">
-                                Te gusta el canal WeB Developer ? <br>
-                                <input type="radio" name="likes" value="1" checked>
-                                <span class="label-body">Si</span>
-                            </label>
-
-                            <label class="example-send-yourself-copy">
-                                <input type="radio" name="likes" value="0">
-                                <span class="label-body">No</span>
-                            </label>
-                        </div>
-
-                        <div class="six columns">
-                            <label for="perfil">Describe tu perfil</label>
-                            <textarea name="descripcion" class="u-full-width"></textarea>
-                        </div>
-                    </div>
-
-                    <div class="row centered">
-                        <div class="seven columns">
-                            <input class="button-primary" type="submit" value="Enviar mi formulario">
-                        </div>
-                    </div>
-
-                </form>
-
+      <div class="row">
+        <div class="column" style="margin-top: 5%">
+          <h3>
+            <strong
+              >PROYECTO LECTOR DE HUELLAS CON ARDUINO, Python 🐍 y base de
+              datos</strong
+            >
+            <hr />
+          </h3>
+          <form
+            id="form"
+            action="{{ url_for('registrarForm') }}"
+            method="POST"
+            autocomplete="off"
+            onsubmit="return handleFormSubmit(event)"
+          >
+            <div class="row">
+              <div class="six columns">
+                <label for="nombre">Nombre</label>
+                <input
+                  type="text"
+                  name="nombre"
+                  class="u-full-width"
+                  required
+                />
+              </div>
+              <div class="six columns">
+                <label for="sexo">Sexo</label>
+                <select class="u-full-width" name="sexo" required>
+                  <option value="Masculino">Masculino</option>
+                  <option value="Femenino">Femenino</option>
+                </select>
+              </div>
             </div>
+            <div class="row centered">
+              <div class="seven columns">
+                <input
+                  class="button-primary"
+                  type="submit"
+                  value="Registrar nuevo usuario"
+                />
+              </div>
+            </div>
+          </form>
+          <div id="form-message" class="msg" style="display: none"></div>
+          <div class="row centered">
+            <div class="seven columns">
+              <button class="button-primary" onclick="handleAbrirPuerta()">
+                Abrir puerta
+              </button>
+            </div>
+          </div>
+          <div id="puerta-message" class="msg" style="display: none"></div>
+          <div class="row centered">
+            <div class="seven columns">
+              <button
+                class="button-mostrar-usuarios"
+                onclick="window.location.href='{{ url_for('mostrar_registro_huella') }}'"
+              >
+                Mostrar Usuarios registrados
+              </button>
+            </div>
+          </div>
+          <div class="row centered">
+            <div class="seven columns">
+              <button
+                class="button-mostrar-usuarios"
+                onclick="window.location.href='{{ url_for('mostrar_registro_asistencia') }}'"
+              >
+                Mostrar asistencias de usarios
+              </button>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
-
     <script>
-    setTimeout(function(){
-        elementoP = document.querySelector('.msg');
-        elementoP.style.display = 'none';
-    }, 2000);
+      function handleFormSubmit(event) {
+        event.preventDefault(); // Evita el envío inmediato del formulario
+        const messageDiv = document.getElementById("form-message");
+        messageDiv.textContent = "Espere por favor...";
+        messageDiv.style.display = "block";
+        document.getElementById("form").submit();
+        setTimeout(() => {
+          messageDiv.textContent = "Introduzca el dedo en el sensor";
+        }, 4000);
+
+        return false; // Evita el envío inmediato del formulario
+      }
+
+      function handleAbrirPuerta() {
+        const messageDiv = document.getElementById("puerta-message");
+        messageDiv.textContent = "Espere por favor...";
+        messageDiv.style.display = "block";
+        abrirPuerta();
+        setTimeout(() => {
+          messageDiv.textContent = "intoduzca su dedo en el lector";
+        }, 4000);
+      }
+
+      function abrirPuerta() {
+        fetch("/abrir_puerta", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ action: "abrir_puerta" }),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.status === "success") {
+              alert(data.message);
+            } else {
+              alert(data.message);
+            }
+            document.getElementById("puerta-message").style.display = "none";
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+            document.getElementById("puerta-message").style.display = "none";
+          });
+      }
+
+      setTimeout(function () {
+        document.querySelector(".msg").style.display = "none";
+      }, 2000);
     </script>
-
-</body>
-
+  </body>
 </html>

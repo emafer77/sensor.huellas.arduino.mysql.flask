@@ -7,7 +7,7 @@ def connectionBD():
         host ="localhost",
         user ="root",
         passwd ="",
-        database = "empresax"
+        database = "lector_huellas"
         )
     if mydb:
         print ("Conexion exitosa")

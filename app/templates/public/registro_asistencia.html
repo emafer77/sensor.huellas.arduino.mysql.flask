@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registro Asistencia</title>
+  </head>
+  <body>
+    <h1>REGISTRO DE ASISTENCIA DE USUARIOS</h1>
+    <table border="1">
+      <tr>
+        <th>#</th>
+        <th>ID</th>
+        <th>fecha</th>
+        <th>hora</th>
+
+        <!-- Añadir más columnas según tu tabla -->
+      </tr>
+      {% for registro in registros %}
+      <tr>
+        <td>{{ registro.id_asistencia }}</td>
+        <td>{{ registro.id_usuario }}</td>
+        <td>{{ registro.fecha }}</td>
+        <td>{{ registro.hora }}</td>
+        <!-- Añadir más columnas según tu tabla -->
+      </tr>
+      {% endfor %}
+    </table>
+  </body>
+</html>
